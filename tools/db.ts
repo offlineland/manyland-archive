@@ -1,7 +1,7 @@
 import { Database } from "bun:sqlite";
 
 // TODO: might want to split it into multiple dbs to not have to re-up the whole thing each time unrelated data is added
-const DB_PATH = "./databases/database.sqlite"
+const DB_PATH = "./databases/creations.sqlite"
 const db = new Database(DB_PATH, { create: true });
 
 
