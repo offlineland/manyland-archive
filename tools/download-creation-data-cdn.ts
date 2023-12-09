@@ -39,7 +39,7 @@ for (let i = 0; i < allIds.length; i++) {
                 db.storeErrorCreation(id, "sprite", res.status)
             }
         })
-        .catch(e => {});
+        .catch(e => console.error("error saving creation sprite", e));
 
 
 
@@ -51,7 +51,7 @@ for (let i = 0; i < allIds.length; i++) {
         })
         .then(async res => {
             if (res.ok) {
-                const data = await res.json();
+                const data = await res.text();
                 db.storeDef(id, data);
             }
             else {
@@ -59,7 +59,7 @@ for (let i = 0; i < allIds.length; i++) {
                 db.storeErrorCreation(id, "def", res.status)
             }
         })
-        .catch(e => {});
+        .catch(e => console.error("error saving creation def", e));
 
 
     await Bun.sleep(SLEEP_MS_CDNDL);
