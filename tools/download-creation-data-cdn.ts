@@ -6,9 +6,9 @@ import * as db from "./db"
 const allIdsFilePath = z.string().parse(Bun.argv[2]);
 
 // MUST end with a /
-const CDN_URL_SPRITES = "";
-const CDN_URL_DEFS = "";
-const SLEEP_MS_CDNDL = 100;
+const CDN_URL_SPRITES = "https://archival.offlineland.io/creations/sprite/";
+const CDN_URL_DEFS = "https://archival.offlineland.io/creations/def/";
+const SLEEP_MS_CDNDL = 0;
 
 
 
