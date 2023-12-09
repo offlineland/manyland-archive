@@ -12,18 +12,18 @@ const storeBlobStmt = db.query(`insert or ignore into sprites VALUES (?, ?);`);
 const storeBlob_ = (id: string, blob: Uint8Array) => storeBlobStmt.run(id, blob);
 export const storeBlob = async (id: string, blob: Blob) => storeBlob_(id, new Uint8Array(await blob.arrayBuffer()));
 const getSpriteStmt = db.prepare(`SELECT value FROM sprites WHERE id = ?`)
-const getSprite_ = (id: string) => getSpriteStmt.get(id) as Uint8Array | null;
+const getSprite_ = (id: string) => getSpriteStmt.get(id) as { value: Uint8Array } | null;
 const getSprite = (id: string): Blob | null => {
     const res = getSprite_(id);
     if (!res) return null;
 
-    return new Blob([ res ])
+    return new Blob([ res.value ])
 }
 export const writeSpriteToFile = (id: string, path: string) => {
-    const sprite = getSprite_(id);
-    if (!sprite) return false;
+    const res = getSprite_(id);
+    if (!res) return false;
 
-    Bun.write(path, sprite);
+    Bun.write(path, res.value);
     return true;
 }
 
