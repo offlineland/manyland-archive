@@ -10,7 +10,8 @@ Here is how it starts:
 
 Below is the Contributor Covenant Code of Conduct. The TLDR is:
 - Be civil and respectful.
-- If not, you will get banned from participating to the Offlineland repositories.
+- If not, you will get banned from participating to the Offlineland repositories and projects.
+- You can contact us privately at [manyland@send.com](mailto:manyland@sent.com) or via discord to the "[manyland](https://discord.com/users/1176265427362517036)" user.
 
 
 ## Our Pledge
