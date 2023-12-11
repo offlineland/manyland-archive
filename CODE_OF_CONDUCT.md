@@ -8,7 +8,10 @@ Here is how it starts:
 > environment for everyone.
 
 
-Below is the Contributor Covenant Code of Conduct.
+Below is the Contributor Covenant Code of Conduct. The TLDR is:
+- Be civil and respectful.
+- If not, you will get banned from participating to the Offlineland repositories.
+
 
 ## Our Pledge
 
