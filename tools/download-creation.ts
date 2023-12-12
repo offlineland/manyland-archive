@@ -68,6 +68,8 @@ export const downloadAttachedData = async (def: CreationDef) => {
     }
 
     // get from props
+    if (def.props?.clonedFrom) db.addToQueue(def.props.clonedFrom)
+    if (def.props?.changerId) db.addToQueue(def.props.changerId)
     if (def.props?.emitsId) db.addToQueue(def.props.emitsId)
     if (def.props?.motionId) db.addToQueue(def.props.motionId)
     if (def.props?.environmentId) db.addToQueue(def.props.environmentId)

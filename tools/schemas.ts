@@ -8,6 +8,8 @@ export const CreationDef = z.object({
     name: z.string().optional(),
 
     props: z.object({
+        clonedFrom: MongoId.optional(),
+        changerId: MongoId.optional(),
         emitsId: MongoId.optional(),
         motionId: MongoId.optional(),
         environmentId: MongoId.optional(),
