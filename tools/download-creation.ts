@@ -1,4 +1,5 @@
 import * as db from "./db"
+import * as dbQueue from "./db-queue"
 import * as api from "./api"
 import { retryOnThrow } from './utils';
 import { CreationDef, HolderContents, Motions, MultiContents } from "./schemas";
@@ -21,7 +22,7 @@ export const downloadAttachedData = async (def: CreationDef) => {
         const data = HolderContents.parse(await retryOnThrow(() => api.getHolderContent(def.id)));
 
         for (const content of data.contents) {
-            db.addToQueue(content.itemId);
+            dbQueue.addToQueue(content.itemId);
         }
 
         Bun.write("./archives/creations/holdercontents/" + id + ".json", JSON.stringify(data.contents))
@@ -39,7 +40,7 @@ export const downloadAttachedData = async (def: CreationDef) => {
 
         if (data.data) {
             for (const { id } of data.data.itemProps) {
-               db.addToQueue(id);
+                dbQueue.addToQueue(id);
             }
 
             await Bun.write("./archives/creations/multicontents/" + id + ".json", JSON.stringify(data_.data))
@@ -57,7 +58,7 @@ export const downloadAttachedData = async (def: CreationDef) => {
 
         if (data.ids !== null) {
             for (const id of data.ids) {
-                db.addToQueue(id);
+                dbQueue.addToQueue(id);
             }
 
             await Bun.write("./archives/creations/bodymotions/" + id + ".json", JSON.stringify(data.ids))
@@ -65,23 +66,23 @@ export const downloadAttachedData = async (def: CreationDef) => {
 
         db.storeBodyMotions(id, data.ids)
         //zip.file("motions/" + id + ".json", JSON.stringify(data), { binary: false, });
-        await Bun.sleep(SLEEP_CREATIONDL_API);
+        await Bun.sleep(50);
         console.log(`Creation "${def.name}" is a body, fetching motion bar done`);
     }
 
     // get from props
-    if (def.props?.clonedFrom) db.addToQueue(def.props.clonedFrom)
-    if (def.props?.changerId) db.addToQueue(def.props.changerId)
-    if (def.props?.emitsId) db.addToQueue(def.props.emitsId)
-    if (def.props?.motionId) db.addToQueue(def.props.motionId)
-    if (def.props?.environmentId) db.addToQueue(def.props.environmentId)
-    if (def.props?.getId) db.addToQueue(def.props.getId)
-    if (def.props?.hasId) db.addToQueue(def.props.hasId)
-    if (def.props?.holdableId) db.addToQueue(def.props.holdableId)
-    if (def.props?.wearableId) db.addToQueue(def.props.wearableId)
+    if (def.props?.clonedFrom) dbQueue.addToQueue(def.props.clonedFrom)
+    if (def.props?.changerId) dbQueue.addToQueue(def.props.changerId)
+    if (def.props?.emitsId) dbQueue.addToQueue(def.props.emitsId)
+    if (def.props?.motionId) dbQueue.addToQueue(def.props.motionId)
+    if (def.props?.environmentId) dbQueue.addToQueue(def.props.environmentId)
+    if (def.props?.getId) dbQueue.addToQueue(def.props.getId)
+    if (def.props?.hasId) dbQueue.addToQueue(def.props.hasId)
+    if (def.props?.holdableId) dbQueue.addToQueue(def.props.holdableId)
+    if (def.props?.wearableId) dbQueue.addToQueue(def.props.wearableId)
     if (def.props?.thingRefs) {
         for (const [id] of def.props.thingRefs) {
-            db.addToQueue(id);
+            dbQueue.addToQueue(id);
         }
     }
 }

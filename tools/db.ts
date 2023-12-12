@@ -47,15 +47,7 @@ export const deleteDef = (id: string) => db.query(`DELETE FROM defs WHERE id = ?
 export const getAllIds = () => db.query("SELECT id FROM defs;").values().flat() as string[];
 
 
-db.query(`create table if not exists queue ( id TEXT PRIMARY KEY );`).run();
-export const addToQueue = (id: string) => {
-    if (isFiltered(id)) return;
-    if (hasDef(id)) return;
 
-    db.query(`insert or ignore into queue VALUES (?);`).run(id);
-}
-export const getQueuePage = (page: number) => (db.query(`SELECT id FROM queue LIMIT 50 OFFSET ?;`).values( 50 * page ) as [string][]).flat();
-export const deleteQueue = (id: string) => db.query(`DELETE FROM queue WHERE id = ?`).run(id);
 
 
 db.query(`create table if not exists errors_creations (id TEXT PRIMARY KEY, type TEXT, statusCode INTEGER);`).run();
