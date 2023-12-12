@@ -59,9 +59,9 @@ export const downloadAttachedData = async (def: CreationDef) => {
             }
 
             await Bun.write("./archives/creations/bodymotions/" + id + ".json", JSON.stringify(data.ids))
-            db.storeBodyMotions(id, data.ids)
         }
 
+        db.storeBodyMotions(id, data.ids)
         //zip.file("motions/" + id + ".json", JSON.stringify(data), { binary: false, });
         await Bun.sleep(SLEEP_CREATIONDL_API);
         console.log(`Creation "${def.name}" is a body, fetching motion bar done`);
