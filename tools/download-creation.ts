@@ -37,11 +37,13 @@ export const downloadAttachedData = async (def: CreationDef) => {
         const data_ = await retryOnThrow(() => api.getMultiData(def.id));
         const data = MultiContents.parse(data_)
 
-        for (const { id } of data.data.itemProps) {
-            db.addToQueue(id);
-        }
+        if (data.data) {
+            for (const { id } of data.data.itemProps) {
+               db.addToQueue(id);
+            }
 
-        await Bun.write("./archives/creations/multicontents/" + id + ".json", JSON.stringify(data_.data))
+            await Bun.write("./archives/creations/multicontents/" + id + ".json", JSON.stringify(data_.data))
+        }
         //zip.file("multis/" + id + ".json", JSON.stringify(data), { binary: false, });
         //db.setMulti(id, JSON.stringify(data));
 

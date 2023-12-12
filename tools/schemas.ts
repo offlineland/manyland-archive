@@ -40,4 +40,4 @@ export const MultiContents = z.object({ isCreator: z.boolean(), data: z.object({
     multithingId: MongoId,
     itemProps: z.object({id: MongoId, state: z.coerce.number().optional() }).array(),
     // More but it's not relevant
-}) })
+}).nullable() })
