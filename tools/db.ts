@@ -53,6 +53,7 @@ export const getAllIds = () => db.query("SELECT id FROM defs;").values().flat() 
 db.query(`create table if not exists errors_creations (id TEXT PRIMARY KEY, type TEXT, statusCode INTEGER);`).run();
 const storeError = db.query(`insert or ignore into errors_creations VALUES (?, ?, ?);`);
 export const storeErrorCreation = (id: string, type: "sprite" | "def", statusCode: number | null) => storeError.run(id, type, statusCode);
+export const hasErroredCreation = (id: string) => db.query(`select 1 from errors_creations WHERE id = ? LIMIT 1;`).get(id) !== null;
 
 
 
