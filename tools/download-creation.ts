@@ -25,7 +25,6 @@ export const downloadAttachedData = async (def: CreationDef) => {
             dbQueue.addToQueue(content.itemId);
         }
 
-        Bun.write("./archives/creations/holdercontents/" + id + ".json", JSON.stringify(data.contents))
         db.storeHolderContent(id, data.contents)
         //zip.file("holders/" + id + ".json", JSON.stringify(data), { binary: false, });
         //db.setHolder(id, JSON.stringify(data));
@@ -60,8 +59,6 @@ export const downloadAttachedData = async (def: CreationDef) => {
             for (const id of data.ids) {
                 dbQueue.addToQueue(id);
             }
-
-            await Bun.write("./archives/creations/bodymotions/" + id + ".json", JSON.stringify(data.ids))
         }
 
         db.storeBodyMotions(id, data.ids)
