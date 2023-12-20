@@ -1,4 +1,4 @@
-// Usage: bun run tools/download-creation-data-cdn.ts ./lists/creations/universe-search-all.json
+// Usage: bun run tools/download-creation-data-cdn.ts ./archives/creations/universe-search-all.json
 
 import { z } from 'zod'
 import * as db from "./db"

@@ -3,7 +3,7 @@ import { isFiltered } from "./filtering/utils";
 import { hasDef } from "./db";
 
 
-const DB_QUEUE_PATH = "./databases/local-creations-queue.sqlite"
+const DB_QUEUE_PATH = "./local-creations-queue.sqlite"
 const dbQueue = new Database(DB_QUEUE_PATH, { create: true });
 dbQueue.query(`create table if not exists queue ( id TEXT PRIMARY KEY );`).run();
 export const addToQueue = (id: string) => {

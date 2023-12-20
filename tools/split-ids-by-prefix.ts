@@ -1,4 +1,4 @@
-// Usage: bun run tools/split-ids-by-prefix.ts ./lists/creations/universe-search-all.json ./lists/creations/by-prefix/ 3
+// Usage: bun run tools/split-ids-by-prefix.ts ./archives/creations/universe-search-all.json ./archives/creations/by-prefix/ 3
 
 import fs from 'node:fs'
 import path from 'node:path'

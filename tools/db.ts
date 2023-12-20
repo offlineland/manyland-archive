@@ -3,7 +3,7 @@ import { isFiltered } from "./filtering/utils";
 import { HolderContent } from "./schemas";
 
 // TODO: might want to split it into multiple dbs to not have to re-up the whole thing each time unrelated data is added
-const DB_PATH = "./databases/creations.sqlite"
+const DB_PATH = "./creations.sqlite"
 const db = new Database(DB_PATH, { create: true });
 
 
