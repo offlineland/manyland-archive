@@ -182,12 +182,12 @@ $ sqlite3 databases/creations.sqlite 'SELECT * FROM defs WHERE value LIKE "%this
 5c65d82e83b0152848df3b6a|{"base":"READABLE","creator":"51f6860bd71972b67b000004","id":"5c65d82e83b0152848df3b6a","name":"never forget","prop":{"textSize":23,"rgb2":"255,255,255","rgb":"0,0,0","textData":"this feeling of wonder!"}}
 ```
 
-(git itself is not designed to store huge datesets like this, so the data is stored via git-LFS. This should all be transparent to your git usage, but for the record Github's documentation on it is [here](https://docs.github.com/en/repositories/working-with-files/managing-large-files/configuring-git-large-file-storage). Git allows for 2GB of git-lfs data on the free tier, so that should be plenty enough for creations! Again, all this data will be available off of CDNs eventually, and the data viz "museum" pages will be on the offlineland.io site. If we exceed this 2GB limit, we might need to look into other ways to host it (eg. a torrent for the final databases, or putting it all into files and using IPFS?))
+Git itself is not designed to store huge datesets like this, so for now the sqlite database file is available [here (1.1GB)](https://archival.offlineland.io/static/creations.sqlite). I'll commit it to the repo once the game closes down. (Github limits files to 100MB and the free tier only has 2GB of git-lfs storage space, so if I commit it now we'll need to rebase and force-push on each change, which is going to be a pain).
 
-Snapshots weight 9GB so they'll definitely be hosted off-repo. The database of placements weights 40GB, so I'll split it into smaller per-area files and compress them. For the record, as a CSV (only placement data), area 3 weights about 400MB. As a zip from https://areabackup.com, it weights 4.8GB (offlineland.io probably can't handle this correctly, so we'll need to figure out how to split it into smaller sections).
+Snapshots weight about 9GB so they'll also be hosted off-repo. The database of placements weights 40GB, so I'll split it into smaller per-area files and compress them for the most popular areas. For the record, as a CSV (only placement data), area 3 weights about 400MB. As a zip from https://areabackup.com, it weights 4.8GB (offlineland.io probably can't handle this correctly, so we'll also need to figure out how to split it into smaller sections).
 
 
-Snapshots taken in Created Areas have their areaId hashed, as they might have been taken in non-public areas. To find all snapshots in an area, first hash the areaId using sha1.
+Following the guidelines outlined in [Responsible use](#responsible-use), snapshots taken in Created Areas have their areaId hashed, as they might have been taken in non-public areas. To find all snapshots in an area, first hash the areaId using sha1. PlayerIDs are also hashed the same way.
 
 
 ## Filtered creations
