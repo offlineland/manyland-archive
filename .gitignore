@@ -175,5 +175,5 @@ dist
 .DS_Store
 
 
-databases/local-creations-queue.sqlite
+local-creations-queue.sqlite
 
