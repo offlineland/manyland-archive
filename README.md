@@ -8,7 +8,7 @@ This archive will only host **public content**: things that one could find by wa
 - the creations available in Universe Search
 - players' public mifts and snapshots
 
-There are a few things that will **not** be hosted here (at least for now) despite being "publicly accessible", because of the high likelyhood that it would pull them out of their context and they were not meant to be archived forever; Most notably writables posts. See section [Responsible use](#responsible-use) for more on that.
+There are a few things that will **not** be hosted here (at least for now) despite being "publicly accessible", because of the high likelihood that it would pull them out of their context and they were not meant to be archived forever; Most notably writables posts. See section [Responsible use](#responsible-use) for more on that.
 
 
 
@@ -119,7 +119,7 @@ Examples:
 - Subareas (accessed via interactings placed at specific spots, often with conditions (`is [EDITOR]`, `has BLUE KEY`, ...))
 
 Examples of subverting privacy expectations (bad):
-- Creating a board directory searchable by player or post content
+- Creating a board directory searchable by player or post content (note that this could be different if Manyland had eg. a built-in board search feature: the expectation of ease-of-access would be different)
 - Performing player-specific analysis of any sort
 
 ##### Public data
@@ -133,7 +133,7 @@ Examples:
 
 
 
-**TLDR**: Most of the time, aggregating data into "the bigger picture" while leaving the more potentially sensitive content is what makes it go from creepy to interesting or insightful. Not all data that can be shown or derived should be. It is also not enough for data to be "public" in some aspect to build visualisations or infer all sorts of data from it - the final result should align with the initial privacy intent, or receive explicit concent from the concerned party.
+**TLDR**: Most of the time, aggregating data into "the bigger picture" while leaving the more potentially sensitive content is what makes it go from creepy to interesting or insightful. Not all data that can be shown or derived should be. It is also not enough for data to be "public" in some aspect to build visualisations or infer all sorts of data from it - the final result should align with the initial privacy intent, or receive explicit consent from the concerned party.
 
 
 
@@ -148,7 +148,7 @@ On the other hand, any API call to manyland's servers (the `manyland.com/j/` url
 
 Note that `tools/download-creation-data-cdn.ts` uses offlineland's caching/archival server (though you can obviously switch out the vars if you want to). It serves creations data from it's own database, and only if that's missing will it contact the Manyland servers (using the proper CDN sharding logic). This is designed to avoid straining Manyland's servers and getting cache misses from Cloudfront.
 
-The cost on my end is minimal (this is the same server I'm hosting online.offlineland.io on), so you can hammer it as much as you'd like for your archival purposes (you might even want to paralellize the requests, because since it's one single server instead of a CDN the content isn't distributed globally - as in, there'll be a higher network latency).
+The cost on my end is minimal (this is the same server I'm hosting online.offlineland.io on), so you can hammer it as much as you'd like for your archival purposes (you might even want to paralellize the requests, because since it's one single server instead of a CDN the content isn't distributed globally - as in, there'll be a higher network latency. It supports HTTP/2). It will continue to be available after manyland shuts down and serve archived content (until I eventually forget about it and it dies a forgotten death in a few years).
 
 Note that this server **will** save **any** id you send to it. For obvious privacy reasons, do **not** proxy off of it if the content is potentially private (eg. when exporting someone's creations) - use the real CDNs for that instead. Only use it when going through public content (from profiles, areas, holders, universe search, etc).
 
@@ -158,6 +158,8 @@ As an additional privacy measure, the only way to access that data (beyond the u
 The public archival server endpoints are:
 - `GET https://archival.offlineland.io/creations/sprite/:creationId`
 - `GET https://archival.offlineland.io/creations/def/:creationId`
+
+It returns `404` on creations that don't exist. If you send it something that doesn't look like a mongoId, it'll reply with a `400` and a JSON body of `{ "error": "bad data" }` (regardless of your `Accept` header), so be mindful of the HTTP status code. It also sets the proper CORS headers so you can use it on any website.
 
 
 
