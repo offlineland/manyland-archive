@@ -207,6 +207,15 @@ To add a value to the list of hashes, run `bun run ./tools/filtering/add-filtere
 We will add an endpoint to archival.offlineland.io for reporting creations and areas soon. In your datavis, please consider adding a manyland-like "report this creation" button.
 
 
+## Steam content
+Steam content is saved in `archives/steam/community/`. SteamDB should also keep the game's data viewable even after it gets unlisted. See:
+- Infos: https://steamdb.info/app/342280/info/
+- Achievements: https://steamdb.info/app/342280/stats/
+- Community Items: https://steamdb.info/app/342280/communityitems/
+- Screenshots: https://steamdb.info/app/342280/screenshots/
+- Steam store page: https://store.steampowered.com/app/342280 ([Wayback machine](https://web.archive.org/web/20230000000000*/https://store.steampowered.com/app/342280))
+- Achievements page: https://steamcommunity.com/stats/342280/achievements ([Wayback machine](https://web.archive.org/web/20230000000000*/https://steamcommunity.com/stats/342280/achievements))
+
 
 ## See also
 If you're interested to see the Anyland side of things, check [here](https://github.com/theneolanders/anyland-archive)!
